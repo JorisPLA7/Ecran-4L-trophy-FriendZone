@@ -1,0 +1,163 @@
+home heure date, mini player, menu 
+Menu
+
+conduite
+Musique play next previus volume source -> donc ecran radio
+
+
+telephone liste de contact - clavier pour composer
+Applications -- meteo -- trophy (base de donnée)
+Reglage (fond d'écran) reglage heure 
+navigation boussole
+Ecraan d'appel
+
+
+language nextion :
+changer un attribut d'un objet
+ typedobjetnumero.attribut=valeur
+changer de page
+ page x
+Envoyer une donnée
+ print var ou print "string"
+
+
+Les ecrans
+
+Ecran menu -- Pouvoir rediriger vers les autres écrans
+	icons fixes : musique, telephone, application, navigation, conduite, parametres.
+		Les icons doivent rediriger vers les pages respectives.
+		Chaque page doit pouvoir rediriger vers le menu.
+
+Ecran conduite := affiche les données de la voitures (orientation, donnée jauges si possibles
+
+Ecran application := semblable au manu, il redirige vers meteo, base de donnée trophy, Ecairage,
+	Eclairage := doit pouvoir gerer tout l'éclairage de la voiture.
+		icons fixes : 
+			Interieur : Ouvre Ecran EclInt
+				Ecran EclInt := controle l'éclairage interieur
+			Exterieur : Ouvre Ecran EclExt
+				Ecran EclInt := controle l'éclairage exterieur
+	Ecran stalk := Une base de donnée contenant les images, numero et nom de tous les équipages. 
+	Ecran Meteo := Affiche la météo.
+		Icons fixes :
+			Maj : envoie id
+		Icons non fixes :
+			Affichage : Affiche le sigle de météo : img changée par le rpi
+			TempInt : modifié par le rpi
+			TempExt : modifié par le rpi
+			Humidité : modifié par le tpi
+
+Ecran navigation := affiche toutes les informations necessaire à l'orientation
+		icons fixes :
+		icons non fixes :
+			Boussole : image tournée par le rpi ou jauge.
+
+Ecran parametre := permet de regler les parametres de la voiture
+	icons fixes
+		Theme : Permet de changer le theme de l'écran
+		A propo : Affiche les infos du programme
+		
+
+
+Ecran Telephone := Composer un numero ou selectionner un contact et appeler avec le telephone en bluetooth
+	Icons fixes :
+		Numéro : (0 à 9, #, *) : envoie txt à TxtNum
+		Effacer : Supprime un caractère a TxtNum
+		Contacts : Ouvre Ecran Contacts
+			Ecran Contacts := Affiche les contacts du telephone et envoie id
+				icons fixes :
+					retour : ouvre l'écran Telephone
+					haut : envoie id
+					bas : envoie id
+				icons non fixes :
+					tableau (Une colonne et autant de ligne que de contacts) : 
+						Renvoie l'id de la case selectionner
+						Le rpi peut creer des lignes
+						le pri peut changer le text des lignes
+					
+		Appel : Envoie id, et envoie le txt du TxtNum au rpi // le rpi ouvre Ecran appel
+			Ecran Appel := Avoir les infos de l'appel ( un eu plus petit que les autres pour qu'il soit en superposition
+				icons fixes :
+					retour : ouvre Ecran menu
+					TxtNum : numéro ou nom du contact appelé
+					Bouton raccroché : envoie id // le rpi ferme l'écran
+					Grosse image d'appel
+				icons non fixes :
+					volume : est changé par la valeur de la barre de volume
+					barre de volume : envoie sa valeur /100
+	Icons non fixes :
+		TxtNum : Sa valeur est changé par Numero et Effacer
+		
+		
+
+Ecran musique : -- Controler la musique de la voiture (Au démarage L'écran Musique lance directement l'écran source, apres, il lance L'écran de la source en cours d'utilisation.)	
+		Ecran source :-- permet de selectionner la source 
+				icons := 	bluetooth :  
+							Si periph connécté : Ouvre écran MusBlt	
+								Ecran MusBlt := controler la musique d'une source bluetooth
+									icons fixes :
+										suiv : envoie id
+										prec : envoie id
+										Periph : Ouvre ecran ChangPeriph
+									icons non fixes : 
+										play/pause : envoie id - peut etre changé par le rpi
+										volume : est changé par la valeur de la barre de volume
+										barre de volume : envoie sa valeur /100 
+										texte de la musique : Texte modifié par le rpi
+							Sinon : ouvre écran RechPeriph
+								Ecran ChangPeriph := selectionne un periph bluetooth :
+										icons fixes :
+											retour : Ouvre ecran MusBlt
+											Nouveau periph : Ouvre ecran NewPeriph
+												Ecran NewPeriph := Recherche un nouveau periph bluetooth
+														icons fixes :
+															retour : Ouvre ecran ChangPeriph
+														icons non fixes :
+															tableau (Une colonne et autant de ligne de de periph bluetooth enregistrés) : 
+																Renvoie l'id de la case selectionner
+																Le rpi peut creer des lignes
+																le pri peut changer le text des lignes
+										icons non fixes :
+											tableau (Une colonne et autant de ligne de de periph bluetooth enregistrés) : 
+												Renvoie l'id de la case selectionner
+												Le rpi peut creer des lignes
+												le pri peut changer le text des lignes
+						jack : envoie id - ouvre ecran MusJack
+								ecran MusJack := gere la musique par jack
+									icons non fixes : 
+										play/pause : envoie id - peut etre changé par le rpi
+										volume : est changé par la valeur de la barre de volume
+										barre de volume : envoie sa valeur /100 
+						usb : envoie id - ouvre ecran MusUsb
+								ecran MusUsb := gere la musique usb
+									icons non fixes : 
+										play/pause : envoie id - peut etre changé par le rpi
+										volume : est changé par la valeur de la barre de volume
+										barre de volume : envoie sa valeur /100 
+										texte de la musique : Texte modifié par le rpi
+						radio : envoie id - ouvre ecran MusRadio
+								ecran MusRadio := gere la radio
+									icons fixes :
+										frequence plus : envoie id
+										frequence moins : envoie id
+										radio plus : envoie id
+										radio moins : envoie id
+										liste radio : ouvre ecran LiRadio
+									icons non fixes :
+										play/pause : envoie id - peut etre changé par le rpi
+										volume : est changé par la valeur de la barre de volume
+										barre de volume : envoie sa valeur /100 
+										texte rds : Texte modifié par le rpi
+										texte frequence : Texte modifié par le rpi
+											Ecran LiRadio := 
+												icons fixes :
+													retour : Ouvre ecran MusRadio
+													Rechercher : envoie id (efface les radios enregistrèes et remplace par celles trouvées)
+												icons non fixes :
+													tableau (Une colonne et autant de ligne de de periph radio enregistrés) : 
+														Renvoie l'id de la case selectionner
+														Le rpi peut creer des lignes
+														le pri peut changer le text des lignes
+												
+
+	

@@ -3,21 +3,28 @@
 
 #define DEFINE_FICHIER
 
+#include "file.h"
+#include "Config.h"
 #include <dirent.h>
-#include <stack>
+#include <unistd.h>
+
+#include <list>
 #include <vector>
 #include <string>
 
 class Fichier
 {
 public:
-	Fichier();
+	Fichier(Config *cfg);
 	~Fichier();
+	std::vector<std::string> getFileName() const;
 
 
 
 protected:
-	std::string base_dir;
+	int listPotentialFile(const char* path);
+	Config *p_cfg;
+	std::list<FILE_DATA> list_fd;
 };
 
 #endif // !DEFINE_FICHIER

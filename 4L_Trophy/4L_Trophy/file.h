@@ -1,7 +1,8 @@
+#pragma once
 #ifndef DEFINE_FILE
 
-#define DEFINE_FILE
 
+#define DEFINE_FILE
 
 #include <dirent.h>
 #include <sys/types.h>
@@ -9,6 +10,7 @@
 #include <cstring>
 
 #define MAX_PATH 1024
+
 int extractName(const char*, char*);
 
 typedef struct
@@ -36,7 +38,14 @@ int getFileData(const char* path,PFILE_DATA fd)
 		strcpy(fd->cFilePath, path);
 		extractName(path, fd->cFileName);
 	}
+	return 0;
+}
 
+bool is_dir(const char* path)
+{
+	struct stat st;
+	stat(path, &st);
+	return S_ISDIR(st.st_mode);
 }
 
 int searchstr(const char* m_str1, const char* m_str2)
@@ -45,7 +54,7 @@ int searchstr(const char* m_str1, const char* m_str2)
 	size_t strlen2 = strlen(m_str2);
 	char* str1 = new char[strlen1];
 	char* str2 = new char[strlen2];
-	for (int i = 0; i < strlen1; i++)
+	for (size_t i = 0; i < strlen1; i++)
 	{
 		if (i < strlen2)
 		{
@@ -55,12 +64,12 @@ int searchstr(const char* m_str1, const char* m_str2)
 	}
 	if (strlen1 > strlen2)
 	{
-		for (int i = strlen1 - 1; i >= 0; i--)
+		for (size_t i = strlen1 - 1; i >= 0; i--)
 		{
 			if (str1[i] == str2[strlen2 - 1])
 			{
 				bool test = true;
-				for (int j = 1; j<strlen2; j++)
+				for (size_t j = 1; j<strlen2; j++)
 				{
 					if (str1[i - j] != str2[strlen2 - 1 - j])
 					{
@@ -76,11 +85,14 @@ int searchstr(const char* m_str1, const char* m_str2)
 		}
 		return -1;
 	}
+	return -1;
 }
+
 bool CheckExtention(const char* str1, const char* str2)
 {
 	return !((searchstr(str1, str2) + strlen(str2))<strlen(str1));
 }
+
 int extractName(const char* path, char* out)
 {
 	size_t pathlen = strlen(path);
@@ -88,6 +100,7 @@ int extractName(const char* path, char* out)
 	while (i >= 0 && path[i] != '/')
 		i--;
 	strcpy(out, &path[i+1]);
+	return 0;
 }
 
 

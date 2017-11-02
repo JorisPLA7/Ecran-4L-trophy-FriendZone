@@ -1,15 +1,21 @@
+#ifndef DEFINE_FILE
+
+#define DEFINE_FILE
+
+
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <cstring>
 
 #define MAX_PATH 1024
+int extractName(const char*, char*);
 
 typedef struct
 {
 	char cFilePath[MAX_PATH];
 	char cFileName[MAX_PATH];
-	unsigned int dwFileAttributes;
+	mode_t st_fileAttributes;
 	time_t st_creationTime;
 	time_t st_lastAccessTime;
 	time_t st_lastWriteTime;
@@ -26,7 +32,9 @@ int getFileData(const char* path,PFILE_DATA fd)
 		fd->st_lastAccessTime = st.st_atime;
 		fd->st_lastWriteTime = st.st_mtime;
 		fd->nFileSize = st.st_size;
-		fd->
+		fd->st_fileAttributes = st.st_mode;
+		strcpy(fd->cFilePath, path);
+		extractName(path, fd->cFileName);
 	}
 
 }
@@ -73,3 +81,14 @@ bool CheckExtention(const char* str1, const char* str2)
 {
 	return !((searchstr(str1, str2) + strlen(str2))<strlen(str1));
 }
+int extractName(const char* path, char* out)
+{
+	size_t pathlen = strlen(path);
+	size_t i = pathlen - 1;
+	while (i >= 0 && path[i] != '/')
+		i--;
+	strcpy(out, &path[i+1]);
+}
+
+
+#endif // !DEFINE_FILE

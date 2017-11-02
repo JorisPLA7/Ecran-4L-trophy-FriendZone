@@ -61,16 +61,18 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Fichier.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Fichier.h" />
     <ClInclude Include="file.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <CppLanguageStandard>Default</CppLanguageStandard>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>C:\MinGW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -79,7 +81,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <CppLanguageStandard>Default</CppLanguageStandard>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>C:\MinGW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -88,7 +90,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <CppLanguageStandard>Default</CppLanguageStandard>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>C:\MinGW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -97,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <CppLanguageStandard>Default</CppLanguageStandard>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>C:\MinGW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -106,7 +108,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <ClCompile>
-      <CppLanguageStandard>Default</CppLanguageStandard>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>C:\MinGW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -115,7 +117,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <ClCompile>
-      <CppLanguageStandard>Default</CppLanguageStandard>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>C:\MinGW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

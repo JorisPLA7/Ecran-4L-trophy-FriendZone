@@ -1,7 +1,12 @@
 #pragma once
-#include <dirent.h>
-#include <string>
+#ifndef DEFINE_FICHIER
 
+#define DEFINE_FICHIER
+
+#include <dirent.h>
+#include <stack>
+#include <vector>
+#include <string>
 
 class Fichier
 {
@@ -9,7 +14,10 @@ public:
 	Fichier();
 	~Fichier();
 
-private:
+
+
+protected:
 	std::string base_dir;
 };
 
+#endif // !DEFINE_FICHIER

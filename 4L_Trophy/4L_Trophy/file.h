@@ -7,7 +7,9 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 #include <cstring>
+#include <vector>
 
 #define MAX_PATH 1024
 
@@ -103,5 +105,33 @@ int extractName(const char* path, char* out)
 	return 0;
 }
 
+int listFile(const char* path, std::vector<FILE_DATA> *list_fd)
+{
+	if (!access(path, R_OK))
+	{
+		DIR *rep = opendir(path);
+		struct dirent*  file;
+		while ((file = readdir(rep)) != NULL)
+		{
+			char file_name[MAX_PATH];
+			strcpy(file_name, path);
+			strcpy(file_name + strlen(path) - 1, file->d_name);
+			if (is_dir(file_name))
+			{
+				listFile(file_name, list_fd);
+			}
+			else
+			{
+				FILE_DATA fd;
+				getFileData(file_name, &fd);
+				list_fd->push_back(fd);
+				break;
+			}
+
+		}
+
+	}
+	return -1;
+}
 
 #endif // !DEFINE_FILE

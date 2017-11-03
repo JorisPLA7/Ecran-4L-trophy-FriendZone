@@ -6,7 +6,6 @@
 
 #include <vector>
 #include <string>
-#include <initializer_list>
 
 class Config
 {
